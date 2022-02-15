@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import { starWars } from "./starWars/reducer";
-const rootReducer=combineReducers({starWars
+import { users } from "./starWars/reducer";
+const rootReducer=combineReducers({users
 })
 
 

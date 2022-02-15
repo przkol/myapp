@@ -1,4 +1,5 @@
 import { RootState } from "../reducers";
 
-export const selectPeople=(state:RootState)=>state.starWars.people
-export const selectIsLoadingPeople=(state:RootState)=>state.starWars.isLoading
+export const selectUsers=(state:RootState)=>state.users.users
+export const selectIsLoadingUsers=(state:RootState)=>state.users.status==='PENDING'
+export const selectIsRejectedUsers=(state:RootState)=>state.users.status==='REJECTED'

@@ -1,27 +1,39 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { Person } from "../../interfaces/Person"
-import { getPeople } from "./actions";
+import { ActionStatus } from "../../interfaces/ActionStatus";
+import { User } from "../../interfaces/User"
+import { getUsers, resetUsers } from "./actions";
 
 
 interface InitState{
-    people:Person[]
-    isLoading:boolean
+    users:User[]
+    status:ActionStatus
 }
 
 const initState:InitState={
-    people:[],
-    isLoading:false
+    users:[],
+    status:'IDLE'
 }
 
-export const starWars=createReducer(initState,builder=>
+export const users=createReducer(initState,builder=>
     builder
-    .addCase(getPeople.pending,state=>{
-    state.isLoading=true
+    .addCase(getUsers.fulfilled,(state,{payload})=>{
+        state.users=payload.data.data
     })
-    .addCase(getPeople.fulfilled,(state,{payload})=>{
-        state.people=payload.data.results
-        state.isLoading=false
-    })
-    // .addCase(getPeople.rejected)
+    .addCase(resetUsers,(state=>{
+        state.users=initState.users
+    }))
+    .addMatcher((action)=>action.type.endsWith('/pending'),(state=>{
+        state.status="PENDING"
+    }))
+    .addMatcher((action)=>action.type.endsWith('/fulfilled'),(state=>{
+        state.status="FULFILLED"
+    }))
+    .addMatcher((action)=>action.type.endsWith('/rejected'),(state=>{
+        state.status="REJECTED"
+    }))
+    .addDefaultCase(((state)=>{
+        state.status="IDLE"
+    }))
+
 
 )

@@ -1,8 +1,14 @@
 export interface ListResponse<T>{
     data:{
-        results:T[];
-        count:number;
-        next:string;
-        previous:string;
+        data:T[];
+        meta:{
+            pagination:{
+                limit:number
+                page:number
+                pages:number
+                total:number
+
+            }
+        }
     }
 }
