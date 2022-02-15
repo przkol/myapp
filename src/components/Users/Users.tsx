@@ -4,7 +4,7 @@ import { selectIsLoadingUsers, selectIsRejectedUsers, selectUsers } from "../../
 import { useDispatch } from 'react-redux';
 import { deleteUser,  getUsers,postUser,resetUsers } from '../../store/starWars/actions';
 import { NewUser } from "../../interfaces/User";
-
+import styles from './Users.module.scss'
 
 export const Users:FunctionComponent=()=>{
     const users=useSelector(selectUsers)
@@ -40,7 +40,7 @@ export const Users:FunctionComponent=()=>{
         return(<div>Rejected...</div>)
     }
 return(
-    <div>
+    <div className={styles.root}>
     Lista
     <button onClick={handleResetUsers}>Reset</button>
     <button onClick={onAddUser}>Add user</button>
